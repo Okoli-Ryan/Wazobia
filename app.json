@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Naijapedia",
+    "slug": "Naijapedia",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Naijapedia"
+}
