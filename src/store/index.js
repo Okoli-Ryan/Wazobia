@@ -1,10 +1,32 @@
 import { createStore, combineReducers } from "redux";
-import { languageReducer } from "./reducers/";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  languageReducer,
+  categoryReducer,
+  dataReducer,
+  searchReducer,
+  topicReducer,
+} from "./reducers";
 
 const rootReducer = combineReducers({
   languageReducer,
+  categoryReducer,
+  dataReducer,
+  searchReducer,
+  topicReducer,
 });
 
-const store = createStore(rootReducer);
+const persistConfig = {
+  key: "key0",
+  storage: AsyncStorage,
+  whitelist: ["dataReducer"], // which reducer want to store
+};
 
-export default store;
+const pReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(pReducer);
+
+const persistor = persistStore(store);
+
+export { store, persistor };

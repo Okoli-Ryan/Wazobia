@@ -1,6 +1,6 @@
-export const languageReducer = (state = "english", action) => {
+export const searchReducer = (state = "", action) => {
   switch (action.type) {
-    case "setLang":
+    case "setSearch":
       return action.payload;
     default:
       return state;

@@ -6,17 +6,50 @@ import Categories from "../StackNavigators/categories";
 import Info from "../StackNavigators/info";
 import Search from "../StackNavigators/search";
 import Topics from "../StackNavigators/topics";
+import Header from "../components/header";
 
 // create a component
 const HomeStack = () => {
   const { Navigator, Screen } = createNativeStackNavigator();
 
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="Categories" component={Categories} />
-      <Screen name="Info" component={Info} />
-      <Screen name="Topics" component={Topics} />
-      <Screen name="Search" component={Search} />
+    <Navigator>
+      <Screen
+        options={(headerProps) => ({
+          headerTitle: (props) => (
+            <Header {...headerProps} {...props} screen={1} />
+          ),
+        })}
+        name="Categories"
+        component={Categories}
+      />
+      <Screen
+        options={(headerProps) => ({
+          headerTitle: (props) => (
+            <Header {...headerProps} {...props} screen={2} />
+          ),
+        })}
+        name="Search"
+        component={Search}
+      />
+      <Screen
+        options={(headerProps) => ({
+          headerTitle: (props) => (
+            <Header {...headerProps} {...props} screen={3} />
+          ),
+        })}
+        name="Topics"
+        component={Topics}
+      />
+      <Screen
+        options={(headerProps) => ({
+          headerTitle: (props) => (
+            <Header {...headerProps} {...props} screen={4} />
+          ),
+        })}
+        name="Info"
+        component={Info}
+      />
     </Navigator>
   );
 };

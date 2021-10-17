@@ -1,13 +1,23 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import TopicBox from "../components/topicBox";
+import { topics } from "../data";
 
 // create a component
-const Topics = () => {
+const Topics = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Topics</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        style={{ width: "100%" }}
+        data={topics}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <TopicBox topic={item.topic} navigation={navigation} />
+        )}
+        keyExtractor={({ topic }) => topic}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -16,8 +26,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2c3e50",
+    backgroundColor: "#e5e5e5",
+    paddingLeft: 4,
   },
 });
 

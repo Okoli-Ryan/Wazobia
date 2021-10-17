@@ -1,16 +1,9 @@
 //import liraries
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 // create a component
-const CategoryBox = ({ category, image }) => {
+const CategoryBox = ({ category, image, navigation }) => {
   return (
     <TouchableOpacity style={styles.container}>
       <>

@@ -1,4 +1,4 @@
-export const languageReducer = (state = "english", action) => {
+export const dataReducer = (state = null, action) => {
   switch (action.type) {
     case "setLang":
       return action.payload;
