@@ -1,0 +1,9 @@
+export { languageReducer } from "./languangeReducer";
+export { topicListReducer } from "./topicListReducer";
+export { categoryListReducer } from "./categoryListReducer";
+export { searchReducer } from "./searchReducer";
+export { topicReducer } from "./topicReducer";
+export { categoryReducer } from "./categoryReducer";
+export { dataReducer } from "./dataReducer";
+export { bookmarkReducer } from "./bookmarkReducer";
+export { modalReducer } from "./modalReducer";
