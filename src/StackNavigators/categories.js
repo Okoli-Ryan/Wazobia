@@ -15,6 +15,21 @@ import { useFocusEffect } from "@react-navigation/native";
 import { setSearch } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 
+const EmptyContainer = () => {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text
+        style={{
+          fontSize: 16,
+          color: "#264653",
+          fontFamily: "Poppins_medium",
+        }}>
+        Coming soon...
+      </Text>
+    </View>
+  );
+};
+
 // create a component
 const Categories = ({ navigation }) => {
   const topics = useSelector((state) => state.topicListReducer);
@@ -57,10 +72,11 @@ const Categories = ({ navigation }) => {
           style={{ width: "100%" }}
           key={searchText + "1"}
           data={topics.filter((e) =>
-            String(e.topic.toLowerCase().split("_")[0]).startsWith(
+            String(e.toLowerCase().split("_")[0]).startsWith(
               searchText.toLowerCase()
             )
           )}
+          ListEmptyComponent={EmptyContainer}
           numColumns={2}
           renderItem={({ item }) => (
             <TopicBox topic={item} navigation={navigation} />

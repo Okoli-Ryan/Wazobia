@@ -27,7 +27,6 @@ const TopicBox = ({ topic, navigation }) => {
   }, []);
 
   const onError = (e) => {
-    console.log(e);
     setImage((prev) => {
       return { ...prev, image: Default };
     });

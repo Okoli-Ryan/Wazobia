@@ -1,11 +1,12 @@
 //import liraries
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { checkFolders } from "../data";
 import { Db } from "../firebase";
 import _ from "lodash";
 import { setTopicList, setCategoryList, setData } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import Bubble from "./bubble";
 
 // create a component
 const SplashScreen = ({ navigation }) => {
@@ -46,7 +47,6 @@ const SplashScreen = ({ navigation }) => {
         if (persistedData.length === 0 && persistedTopic.length === 0) {
           navigation.navigate("Error", {
             callback: () => {
-              console.log("error getting data " + e);
               navigation.goBack();
               setRetry((prev) => prev + 1);
             },
@@ -62,102 +62,10 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 30,
-            height: 30,
-            borderRadius: 15,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 60,
-            height: 60,
-            borderRadius: 30,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 100,
-            height: 100,
-            borderRadius: 50,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 20,
-            height: 20,
-            borderRadius: 10,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
-      <View
-        style={[
-          styles.bubble,
-          {
-            width: 150,
-            height: 150,
-            borderRadius: 75,
-            top: Math.floor(
-              Math.random() * Dimensions.get("window").height + 1
-            ),
-            left: Math.floor(
-              Math.random() * Dimensions.get("window").width + 1
-            ),
-          },
-        ]}
-      />
+      <Bubble length={120} />
+      <Bubble length={20} neg />
+      <Bubble length={80} />
+
       <Text
         style={{ fontSize: 24, color: "white", fontFamily: "Poppins_medium" }}>
         Wázobia
@@ -173,11 +81,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#264653",
-  },
-  bubble: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    zIndex: 2,
-    position: "absolute",
   },
 });
 

@@ -37,17 +37,15 @@ const Info = ({ navigation }) => {
   const categoryText = topic.split("_")[1];
 
   const textPlaceholder = () => {
-    try {
-      return data[`${categoryText.toLowerCase()}`][
-        `${topicText.toLowerCase()}`
-      ][`${language}`];
-      // if (e === undefined) return "Still in Progress";
-    } catch (e) {
-      return ":Still in progress...";
+    let text =
+      data[`${categoryText.toLowerCase()}`][`${topicText.toLowerCase()}`][
+        `${language}`
+      ];
+    if (typeof text === "undefined") {
+      return ":Still in progress";
     }
+    return text;
   };
-
-  let text = textPlaceholder();
 
   const onPress = async () => {
     if (playing) {
@@ -75,6 +73,7 @@ const Info = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
     (async () => {
       setPlaying(false);
       setReady(false);
@@ -85,11 +84,13 @@ const Info = ({ navigation }) => {
           topic.toLowerCase().split("_")[0],
           language
         );
+        if (!soundLink) throw new Error();
         sound.current = new Audio.Sound();
+
         await sound.current.loadAsync({
           uri: soundLink,
         });
-        setReady(true);
+        if (isMounted) setReady(true);
         // await sound.playAsync();
         // Your sound is playing!
 
@@ -97,29 +98,33 @@ const Info = ({ navigation }) => {
         // when you are done using the Sound object
       } catch (error) {
         // An error occurred!
-        setReady(false);
+        if (isMounted) setReady(false);
 
         const isConnected = NetInfo.fetch().then((state) => {
           return state.isConnected;
         });
-        navigation.navigate("Error", {
-          callbackMessage: isConnected ? "Ok" : "Try Again",
-          callback: () => {
-            isConnected
-              ? (() => {
-                  navigation.goBack();
-                })()
-              : (() => {
-                  navigation.goBack();
-                  setRetry((prev) => prev + 1);
-                })();
-          },
-          message: isConnected
-            ? "Audio file does not exist at the moment"
-            : "Network Error",
-        });
+        if (isMounted)
+          navigation.navigate("Error", {
+            callbackMessage: isConnected ? "Ok" : "Try Again",
+            callback: () => {
+              isConnected
+                ? (() => {
+                    navigation.goBack();
+                  })()
+                : (() => {
+                    navigation.goBack();
+                    setRetry((prev) => prev + 1);
+                  })();
+            },
+            message: isConnected
+              ? "Audio file does not exist at the moment"
+              : "Network Error",
+          });
       }
     })();
+    return () => {
+      isMounted = false;
+    };
   }, [language, retry]);
 
   return (
@@ -173,11 +178,11 @@ const Info = ({ navigation }) => {
         <View style={{ marginTop: 32 }}>
           {language !== "English" && (
             <Text style={styles.translate}>
-              {text.toString().split(":")[0].trim()}
+              {textPlaceholder().toString().split(":")[0].trim()}
             </Text>
           )}
           <Text style={styles.text}>
-            {text.toString().split(":")[1].trim()}
+            {textPlaceholder().toString().split(":")[1].trim()}
           </Text>
         </View>
       </ScrollView>

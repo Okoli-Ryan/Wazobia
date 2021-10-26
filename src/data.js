@@ -40,7 +40,7 @@ export async function ensureDirExists(directory) {
   return new Promise((resolve) => resolve(true));
 }
 
-export async function ensureFileExists(type, file, language) {
+export async function ensureFileExists(type, file, language, err) {
   if (type === "audio") {
     const fileInfo = await FileSystem.getInfoAsync(
       FileSystem.cacheDirectory + `9ja/audio/${language}_${file}.m4a`
@@ -50,7 +50,8 @@ export async function ensureFileExists(type, file, language) {
 
     try {
       const url = await getDownloadLink(`audio/${language}_${file}.m4a`);
-      const fileUri = FileSystem.cacheDirectory + `9ja/audio/${file}.m4a`;
+      const fileUri =
+        FileSystem.cacheDirectory + `9ja/audio/${language}_${file}.m4a`;
 
       let downloadObject = FileSystem.createDownloadResumable(url, fileUri);
 
@@ -80,7 +81,8 @@ export async function ensureFileExists(type, file, language) {
             fileUri
           );
 
-          downloadObject.downloadAsync();
+          let { uri } = await downloadObject.downloadAsync();
+          return uri;
         } catch (e) {}
         return link;
       }
