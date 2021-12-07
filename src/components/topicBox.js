@@ -41,8 +41,8 @@ const TopicBox = ({ topic, navigation }) => {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image onError={onError} source={image.image} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text numberOfLines={1} style={styles.text}>
-          {topic.split("_")[0]}
+        <Text numberOfLines={2} style={styles.text}>
+          {_.startCase(topic.split("_")[0])}
         </Text>
       </View>
     </TouchableOpacity>

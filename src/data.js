@@ -1,17 +1,15 @@
-import Animals from "./assets/images/coverImages/Animals.jpg";
-import Art from "./assets/images/coverImages/Art.jpg";
-import EthnicGroups from "./assets/images/coverImages/EthnicGroups.jpg";
-import Festivals from "./assets/images/coverImages/Festivals.jpg";
-import Food from "./assets/images/coverImages/Food.jpg";
-import HistoricPeople from "./assets/images/coverImages/HistoricPeople.jpg";
-import HistoricPlaces from "./assets/images/coverImages/HistoricPlaces.jpg";
-import Games from "./assets/images/coverImages/IndigenousGames.jpg";
-import NHistory from "./assets/images/coverImages/NigerianHistory.jpg";
-import Religion from "./assets/images/coverImages/Religion.jpg";
-import States from "./assets/images/coverImages/States.jpg";
+import Animals from "./assets/images/coverImages/Animals.png";
+import EthnicGroups from "./assets/images/coverImages/EthnicGroups.png";
+import Festivals from "./assets/images/coverImages/Festivals.png";
+import Food from "./assets/images/coverImages/Food.png";
+import History from "./assets/images/coverImages/History.png";
+import Games from "./assets/images/coverImages/IndigenousGames.png";
+import States from "./assets/images/coverImages/States.png";
+import Government from "./assets/images/coverImages/Government.png";
 
 import { Storage } from "./firebase";
 import * as FileSystem from "expo-file-system";
+import _ from "lodash";
 
 class Topic {
   constructor(topic, category = "Animals") {
@@ -63,6 +61,7 @@ export async function ensureFileExists(type, file, language, err) {
     }
   } else if (type === "image") {
     //check if image exists locally
+    console.log("file " + file);
     const fileInfo = await FileSystem.getInfoAsync(
       FileSystem.cacheDirectory + `9ja/images/${file}.jpg`
     );
@@ -82,14 +81,17 @@ export async function ensureFileExists(type, file, language, err) {
           );
 
           let { uri } = await downloadObject.downloadAsync();
+          console.log("downloaded " + uri);
           return uri;
         } catch (e) {}
         return link;
       }
       // return local uri
+      console.log("local " + fileInfo.uri);
       return fileInfo.uri;
     } catch (e) {
       //catch network error or file not existing
+      console.log(e);
     }
   }
 }
@@ -117,40 +119,29 @@ export const topics = [
 export const categories = [
   {
     category: "animals",
-    image: require("./assets/images/coverImages/Animals.jpg"),
+    image: Animals,
   },
-  { category: "art", image: require("./assets/images/coverImages/Art.jpg") },
   {
     category: "ethnic groups",
-    image: require("./assets/images/coverImages/EthnicGroups.jpg"),
+    image: EthnicGroups,
   },
   {
     category: "festivals",
-    image: require("./assets/images/coverImages/Festivals.jpg"),
+    image: Festivals,
   },
-  { category: "food", image: require("./assets/images/coverImages/Food.jpg") },
+  { category: "food", image: Food },
   {
-    category: "historic people",
-    image: require("./assets/images/coverImages/HistoricPeople.jpg"),
+    category: "history",
+    image: History,
   },
-  {
-    category: "historic places",
-    image: require("./assets/images/coverImages/HistoricPlaces.jpg"),
-  },
+
   {
     category: "indigenous games",
-    image: require("./assets/images/coverImages/IndigenousGames.jpg"),
-  },
-  {
-    category: "nigerian history",
-    image: require("./assets/images/coverImages/NigerianHistory.jpg"),
-  },
-  {
-    category: "religion",
-    image: require("./assets/images/coverImages/Religion.jpg"),
+    image: Games,
   },
   {
     category: "states",
-    image: require("./assets/images/coverImages/States.jpg"),
+    image: States,
   },
+  { category: "government", image: Government },
 ];

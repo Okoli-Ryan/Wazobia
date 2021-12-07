@@ -221,6 +221,32 @@ const SubHeader = (screen, dispatch, goBack) => {
   else return null;
 };
 
+const LanguageHeader = (screen, displayModal, language) => {
+  if (screen === 4)
+    return (
+      <>
+        <Text style={styles.staticLanguage}>Language:</Text>
+        <TouchableOpacity onPress={displayModal} style={styles.pickerBox}>
+          <View style={styles.circle} />
+          <Text style={styles.pickerLabel}>
+            {language.substring(0, 3).toUpperCase()}
+          </Text>
+          <Image
+            source={Down}
+            resizeMode="contain"
+            style={{
+              width: 8,
+              height: 8,
+              flexDirection: "row",
+              alignSelf: "center",
+            }}
+          />
+        </TouchableOpacity>
+      </>
+    );
+  return null;
+};
+
 const Header = ({ screen, navigation }) => {
   const language = useSelector((state) => state.languageReducer);
   const dispatch = useDispatch();
@@ -275,25 +301,7 @@ const Header = ({ screen, navigation }) => {
               <Image style={{ width: 20, height: 20 }} source={Menu} />
             </TouchableOpacity>
             <View style={styles.group}>
-              <Text style={styles.staticLanguage}>Language:</Text>
-              <TouchableOpacity
-                onPress={() => setModalVisible(true)}
-                style={styles.pickerBox}>
-                <View style={styles.circle} />
-                <Text style={styles.pickerLabel}>
-                  {language.substring(0, 3).toUpperCase()}
-                </Text>
-                <Image
-                  source={Down}
-                  resizeMode="contain"
-                  style={{
-                    width: 8,
-                    height: 8,
-                    flexDirection: "row",
-                    alignSelf: "center",
-                  }}
-                />
-              </TouchableOpacity>
+              {LanguageHeader(screen, () => setModalVisible(true), language)}
             </View>
           </View>
           {SubHeader(screen, dispatch, goBack)}
@@ -332,7 +340,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   container: {
-    minHeight: 110,
+    minHeight: 80,
     flex: 1,
     backgroundColor: "#f9f8f8",
     width: "100%",

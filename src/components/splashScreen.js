@@ -34,7 +34,7 @@ const SplashScreen = ({ navigation }) => {
 
         let mainData = dataDb.data();
         let categories = [];
-        // console.log(doc.data());
+
         for (let category in mainData) {
           categories.push(category);
         }
