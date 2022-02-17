@@ -6,6 +6,8 @@ import History from "./assets/images/coverImages/History.png";
 import Games from "./assets/images/coverImages/IndigenousGames.png";
 import States from "./assets/images/coverImages/States.png";
 import Government from "./assets/images/coverImages/Government.png";
+import Culture from "./assets/images/coverImages/Culture.png";
+
 
 import { Storage } from "./firebase";
 import * as FileSystem from "expo-file-system";
@@ -120,6 +122,10 @@ export const categories = [
   {
     category: "animals",
     image: Animals,
+  },
+  {
+    category: "culture",
+    image: Culture,
   },
   {
     category: "ethnic groups",
