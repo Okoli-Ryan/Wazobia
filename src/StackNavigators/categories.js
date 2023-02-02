@@ -14,17 +14,30 @@ import TopicBox from "../components/topicBox";
 import { useFocusEffect } from "@react-navigation/native";
 import { setSearch } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import LottieView from "lottie-react-native";
 
-const EmptyContainer = () => {
+const EmptyContainer = (search) => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1 }}>
+      <LottieView
+        source={require("../assets/lottie/emptySearch.json")}
+        autoPlay
+        style={{
+          flex: 1,
+          width: "100%",
+          transform: [{ scale: 1 }],
+        }}
+        loop
+      />
       <Text
         style={{
-          fontSize: 16,
+          textAlign: "center",
           color: "#264653",
           fontFamily: "Poppins_medium",
+          marginTop: 16,
+          fontSize: 20,
         }}>
-        Coming soon...
+        {`There's no topic starting with ${search} :/`}
       </Text>
     </View>
   );
@@ -76,7 +89,7 @@ const Categories = ({ navigation }) => {
               searchText.toLowerCase()
             )
           )}
-          ListEmptyComponent={EmptyContainer}
+          ListEmptyComponent={EmptyContainer(searchText)}
           numColumns={2}
           renderItem={({ item }) => (
             <TopicBox topic={item} navigation={navigation} />

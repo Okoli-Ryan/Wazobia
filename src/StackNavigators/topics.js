@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import TopicBox from "../components/topicBox";
 import { useSelector } from "react-redux";
+import LottieView from "lottie-react-native";
 
 // create a component
 const Topics = ({ navigation }) => {
@@ -21,6 +22,30 @@ const Topics = ({ navigation }) => {
           <TopicBox topic={item} navigation={navigation} />
         )}
         keyExtractor={(topic) => topic}
+        ListEmptyComponent={() => (
+          <View style={{ flex: 1 }}>
+            <LottieView
+              source={require("../assets/lottie/emptyBox.json")}
+              autoPlay
+              style={{
+                flex: 1,
+                width: "100%",
+                transform: [{ scale: 1.2 }],
+              }}
+              loop
+            />
+            <Text
+              style={{
+                textAlign: "center",
+                color: "#264653",
+                fontFamily: "Poppins_medium",
+                marginTop: 16,
+                fontSize: 20,
+              }}>
+              Coming soon :)
+            </Text>
+          </View>
+        )}
       />
     </SafeAreaView>
   );

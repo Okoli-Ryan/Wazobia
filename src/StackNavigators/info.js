@@ -20,6 +20,7 @@ import { Audio } from "expo-av";
 import { ensureFileExists } from "../data";
 import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
+import { useFocusEffect } from "@react-navigation/native";
 
 // create a component
 const Info = ({ navigation }) => {
@@ -57,6 +58,15 @@ const Info = ({ navigation }) => {
     }
   };
   //!test the info page
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (sound.current) sound.current.unloadAsync();
+      return () => {
+        if (sound.current) sound.current.unloadAsync();
+      };
+    }, [language])
+  );
 
   useEffect(() => {
     (async () => {
@@ -234,7 +244,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Poppins",
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: 24,
     color: "#264653",
     paddingHorizontal: 16,
     marginTop: 16,
