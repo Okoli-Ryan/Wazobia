@@ -5,7 +5,12 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9234b03a-b3ef-4fea-be12-630f3af5c5bb"
+      }
+    }
   },
   "name": "Naijapedia"
 }

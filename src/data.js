@@ -9,6 +9,7 @@ import Games from "./assets/images/coverImages/IndigenousGames.jpg";
 import NHistory from "./assets/images/coverImages/NigerianHistory.jpg";
 import Religion from "./assets/images/coverImages/Religion.jpg";
 import States from "./assets/images/coverImages/States.jpg";
+import Culture from "./assets/images/coverImages/Culture.jpg";
 
 import { Storage } from "./firebase";
 import * as FileSystem from "expo-file-system";
@@ -120,6 +121,10 @@ export const categories = [
     image: require("./assets/images/coverImages/Animals.jpg"),
   },
   { category: "art", image: require("./assets/images/coverImages/Art.jpg") },
+  {
+    category: "culture",
+    image: require("./assets/images/coverImages/Culture.jpg"),
+  },
   {
     category: "ethnic groups",
     image: require("./assets/images/coverImages/EthnicGroups.jpg"),

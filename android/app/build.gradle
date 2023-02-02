@@ -94,11 +94,7 @@ apply from: "../../node_modules/expo-updates/scripts/create-manifest-android.gra
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-<<<<<<< HEAD
 def enableSeparateBuildPerCPUArchitecture = true
-=======
-def enableSeparateBuildPerCPUArchitecture = false
->>>>>>> 2d9300a222f82c00275ff64f404b63be0d7b300c
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -139,20 +135,14 @@ android {
         applicationId "com.naijapedia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-<<<<<<< HEAD
         versionCode 2
         versionName "1.1"
-=======
-        versionCode 1
-        versionName "1.0"
->>>>>>> 2d9300a222f82c00275ff64f404b63be0d7b300c
     }
     splits {
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-<<<<<<< HEAD
             include "armeabi-v7a", "arm64-v8a"
         }
     }
@@ -163,12 +153,6 @@ android {
             keyAlias 'your_key_alias'
             keyPassword 'olisaeloka11'
         }
-=======
-            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
-        }
-    }
-    signingConfigs {
->>>>>>> 2d9300a222f82c00275ff64f404b63be0d7b300c
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
