@@ -1,13 +1,15 @@
-import Animals from "./assets/images/coverImages/Animals.png";
-import EthnicGroups from "./assets/images/coverImages/EthnicGroups.png";
-import Festivals from "./assets/images/coverImages/Festivals.png";
-import Food from "./assets/images/coverImages/Food.png";
-import History from "./assets/images/coverImages/History.png";
-import Games from "./assets/images/coverImages/IndigenousGames.png";
-import States from "./assets/images/coverImages/States.png";
-import Government from "./assets/images/coverImages/Government.png";
-import Culture from "./assets/images/coverImages/Culture.png";
-
+import Animals from "./assets/images/coverImages/Animals.jpg";
+import Art from "./assets/images/coverImages/Art.jpg";
+import EthnicGroups from "./assets/images/coverImages/EthnicGroups.jpg";
+import Festivals from "./assets/images/coverImages/Festivals.jpg";
+import Food from "./assets/images/coverImages/Food.jpg";
+import HistoricPeople from "./assets/images/coverImages/HistoricPeople.jpg";
+import HistoricPlaces from "./assets/images/coverImages/HistoricPlaces.jpg";
+import Games from "./assets/images/coverImages/IndigenousGames.jpg";
+import NHistory from "./assets/images/coverImages/NigerianHistory.jpg";
+import Religion from "./assets/images/coverImages/Religion.jpg";
+import States from "./assets/images/coverImages/States.jpg";
+import Culture from "./assets/images/coverImages/Culture.jpg";
 
 import { Storage } from "./firebase";
 import * as FileSystem from "expo-file-system";
@@ -124,7 +126,6 @@ export const categories = [
     image: Animals,
   },
   {
-    category: "culture",
     image: Culture,
   },
   {
